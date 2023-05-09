@@ -1,0 +1,17 @@
+{
+  "": {
+    "swift-dependencies": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/master.swiftdeps"
+  },
+  "/home/muqadam-sabir/Experiences/W2653/main.swift": {
+    "dependencies": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/main.d",
+    "object": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/main.swift.o",
+    "swiftmodule": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/main~partial.swiftmodule",
+    "swift-dependencies": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/main.swiftdeps"
+  },
+  "/home/muqadam-sabir/Experiences/W2653/metar.swift": {
+    "dependencies": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/metar.d",
+    "object": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/metar.swift.o",
+    "swiftmodule": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/metar~partial.swiftmodule",
+    "swift-dependencies": "/home/muqadam-sabir/Experiences/W2653/.build/x86_64-unknown-linux-gnu/debug/Simple.build/metar.swiftdeps"
+  }
+}

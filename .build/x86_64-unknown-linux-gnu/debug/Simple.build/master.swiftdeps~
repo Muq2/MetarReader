@@ -1,0 +1,7 @@
+version: "Swift version 5.7.1 (swift-5.7.1-RELEASE)"
+options: "149e71fe213120275bc366506e2568a3c56ae1d6b9174b2509ed5aefe1001e95"
+build_start_time: [1682616848, 125887870]
+build_end_time: [1682616856, 401973]
+inputs:
+  "/home/muqadam-sabir/Experiences/W2653/main.swift": !private [1682616843, 372937679]
+  "/home/muqadam-sabir/Experiences/W2653/metar.swift": !private [1682616670, 396201133]

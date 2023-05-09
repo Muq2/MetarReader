@@ -1,0 +1,159 @@
+import Foundation
+import FoundationNetworking
+
+
+class MetarRow:NSObject{
+    var raw_text:String = ""
+    var station_id:String = ""
+    var observation_time:String = ""
+    var laitude:String = ""
+    var longitude:String = ""
+    var temp_c:String = ""
+    var dewpoint_c:String = ""
+    var wind_dir_degrees:String = ""
+    var wind_speed_kt:String = ""
+    var wind_gust_kt:String = ""
+    var visivility_statute_mi:String = ""
+    var altim_in_hg:String = ""
+    var sea_level_pressure_mb:String = ""
+    var corrected:String = ""
+    var auto:String = ""
+    var auto_station:String = ""
+    var maintenance_indicator_on:String = ""
+    var no_signal:String = ""
+    var lighting_sensor_off:String = ""
+    var freezing_rain_sensor_off:String = ""
+    var present_weather_sensor_off:String = ""
+    var wx_string:String = ""
+    var sky_cover:String = ""
+    var cloud_base_ft_agl:String = ""
+    var sky_cover1:String = ""
+    var cloud_base_ft_agl1:String = ""
+    var sky_cover2:String = ""
+    var cloud_base_ft_agl2:String = ""
+    var flight_category:String = ""
+    var three_hr_pressure_tendency_mb:String = ""
+    var maxT_c:String = ""
+    var minT_c:String = ""
+    var maxT24hr_c:String = ""
+    var minT24hr_c:String = ""
+    var precip_in:String = ""
+    var pcp3hr_in:String = ""
+    var pcp6hr_in:String = ""
+    var pcp24hr_in:String = ""
+    var snow_in:String = ""
+    var vert_vis_ft:String = ""
+    var metar_type:String = ""
+    var elevation_m:String = ""
+}
+
+class Metar{
+    var data:[[String:String]] = []
+    var columnTitles:[String] = []
+    var columnType:[String] = ["Int", "Double"]
+    var metar = [MetarRow].self
+    //default constructor
+    init() {
+    }
+/*
+    //initializer that accepts a series of fields of the expected type
+    init() {
+    }
+
+    //initializer that accepts a series of strings, one for each field
+    init() {
+    }
+
+    //initializer that accepts a single string, in a format identical to that in the sample file
+    init() {
+    }
+*/
+    
+    func readStringFromURL(stringURL:String)-> String!{
+        var content : String = ""
+        do {
+            content = try String(contentsOf:URL(string: stringURL)!)
+        }
+        catch let error {
+            print("Error: \(error)")
+        }
+        return content
+    }
+    
+    func cleanRows(stringData:String)->[String]{
+        var cleanFile = stringData
+        cleanFile = cleanFile.replacingOccurrences(of:"\r", with: "\n")
+        cleanFile = cleanFile.replacingOccurrences(of: "\n\n", with: "\n")
+        return cleanFile.components(separatedBy: "\n")
+    }
+
+    func cleanFields(oldString:String) -> [String]{
+        let delimiter = "\t"
+        var newString = oldString.replacingOccurrences(of: "\",\"", with: delimiter)
+        newString = newString.replacingOccurrences(of: ",\"", with: delimiter)
+        newString = newString.replacingOccurrences(of: "\",", with: delimiter)
+        newString = newString.replacingOccurrences(of: "\"", with: "")
+        return newString.components(separatedBy: delimiter)
+    }
+    
+    func convertCSV(stringData:String) -> [[String:String]] {
+        let rows = cleanRows(stringData: stringData)
+        let columnLine = 5
+        if rows.count > 0 {
+            data = []
+            
+            columnTitles = cleanFields(oldString: rows[columnLine])
+            
+            for row in rows{
+                let fields = cleanFields(oldString: row)
+                
+                if fields.count != columnTitles.count{
+                    continue
+                }
+                
+                var newRow = [String:String]()
+                
+                for index in 0..<fields.count{
+                    
+                    let column = columnTitles[index]
+                    let field = fields[index]
+
+                    switch columnType[index]{
+                    case "Int": 
+                        newRow[column] = field
+                        break
+                    case "Double":
+                        newRow[column] = field
+                        break
+                    default: //default keeps as string
+                        newRow[column] = field
+                        break
+                    }
+                }
+                data += [newRow]
+            }
+            
+        } else {
+            print("No data in file")
+        }
+        return data
+    }
+    
+    func printStationID()->[String]{        
+        var stationID = [String]()    
+        
+        for index in 6..<data.count{
+            
+            let row = data[index]
+            print(row["raw_text"])
+            stationID.append(row["station_id"]!)
+            
+        }
+        
+               
+        return stationID
+        
+    }
+
+}
+                
